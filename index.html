@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8">
 <title>Happy Birthday Jannu ❤️</title>
 
@@ -27,7 +28,31 @@ text-align:center;
 overflow:hidden;
 }
 
-/* star sky */
+/* INTRO SCREEN */
+
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:#ff6a88;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+#openBtn{
+padding:20px 40px;
+font-size:22px;
+background:white;
+color:#ff4d6d;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+/* STAR SKY */
 
 .star{
 position:fixed;
@@ -43,40 +68,23 @@ animation:twinkle 3s infinite;
 100%{opacity:0}
 }
 
-/* start button */
-
-#startBtn{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-padding:20px 40px;
-font-size:22px;
-background:#ff4d6d;
-border:none;
-color:white;
-border-radius:10px;
-cursor:pointer;
-z-index:9999;
-}
-
-/* glowing title */
+/* TITLE */
 
 #glowTitle{
 font-size:44px;
 opacity:0;
-text-shadow:0 0 10px #fff,0 0 20px #ff8fb1,0 0 40px #ff4d6d;
+text-shadow:0 0 10px white,0 0 20px #ff8fb1,0 0 40px #ff4d6d;
 transition:1s;
 }
 
-/* photo */
+/* PHOTO */
 
 .photo{
 width:180px;
 height:180px;
-margin:auto;
 border-radius:50%;
 overflow:hidden;
+margin:auto;
 border:6px solid white;
 animation:beat 1.2s infinite;
 }
@@ -93,7 +101,7 @@ object-fit:cover;
 100%{transform:scale(1)}
 }
 
-/* slideshow */
+/* SLIDESHOW */
 
 .slideshow{
 width:260px;
@@ -116,7 +124,7 @@ transition:1s;
 opacity:1;
 }
 
-/* petals */
+/* PETALS */
 
 .petal{
 position:fixed;
@@ -131,41 +139,39 @@ transform:translateY(100vh) rotate(360deg);
 }
 }
 
-/* fireworks */
+/* CANVAS TREE */
+
+#canvas{
+position:absolute;
+top:0;
+left:50%;
+transform:translateX(-50%);
+z-index:1;
+pointer-events:none;
+}
+
+/* FIREWORK */
 
 @keyframes explode{
 0%{transform:scale(1);opacity:1}
 100%{transform:scale(15);opacity:0}
 }
 
-/* cake */
-
-.cake{
-font-size:50px;
-}
-
-/* canvas tree */
-
-#canvas{
-position:absolute;
-top:0;
-left:0;
-z-index:-1;
-}
-
-#message{
-width:80%;
-margin:auto;
-font-size:18px;
-line-height:1.6;
-}
-
 </style>
+
 </head>
 
 <body>
 
-<button id="startBtn">Tap for your birthday surprise ❤️</button>
+<!-- INTRO -->
+
+<div id="intro">
+
+<h2>Tap to open your birthday surprise ❤️</h2>
+
+<button id="openBtn">Open</button>
+
+</div>
 
 <audio id="music" loop>
 <source src="aud.mp3">
@@ -179,7 +185,7 @@ line-height:1.6;
 
 <div id="message"></div>
 
-<div class="cake">🎂</div>
+<div style="font-size:50px">🎂</div>
 
 <div class="slideshow">
 
@@ -194,16 +200,15 @@ line-height:1.6;
 
 <div id="timer"></div>
 
-<canvas id="canvas" width="1100" height="680"></canvas>
+<canvas id="canvas" width="1200" height="700"></canvas>
 
 <script>
 
-/* star sky */
+/* STAR SKY */
 
 for(let i=0;i<200;i++){
 
 let star=document.createElement("div");
-
 star.className="star";
 
 star.style.left=Math.random()*100+"vw";
@@ -214,19 +219,25 @@ document.body.appendChild(star);
 
 }
 
-/* start button */
+/* INTRO BUTTON */
 
-document.getElementById("startBtn").onclick=function(){
+document.getElementById("openBtn").onclick=function(){
+
+document.getElementById("intro").style.display="none";
 
 document.getElementById("music").play();
 
-fireworks(40);
+setTimeout(function(){
 
-this.style.display="none";
+fireworks(80);
+
+document.getElementById("glowTitle").style.opacity=1;
+
+},8000);
 
 };
 
-/* fireworks */
+/* FIREWORK */
 
 function fireworks(n){
 
@@ -251,7 +262,7 @@ setTimeout(()=>fire.remove(),1000);
 
 }
 
-/* slideshow */
+/* SLIDESHOW */
 
 let slides=document.querySelectorAll(".slide");
 let index=0;
@@ -272,7 +283,7 @@ showSlides();
 
 setInterval(showSlides,3000);
 
-/* petals */
+/* PETALS */
 
 setInterval(()=>{
 
@@ -289,14 +300,13 @@ setTimeout(()=>petal.remove(),10000);
 
 },400);
 
-/* timer */
+/* TIMER */
 
 const birthDate=new Date("March 12, 1998").getTime();
 
 function updateTimer(){
 
 const now=new Date().getTime();
-
 const diff=now-birthDate;
 
 const days=Math.floor(diff/(1000*60*60*24));
@@ -312,7 +322,7 @@ days+" days "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
 
 setInterval(updateTimer,1000);
 
-/* typing message */
+/* TYPING MESSAGE */
 
 const text=`Happy Birthday Jannu ❤️
 
@@ -337,16 +347,6 @@ setTimeout(typing,35);
 }
 
 typing();
-
-/* when tree finishes bloom */
-
-setTimeout(function(){
-
-fireworks(80);
-
-document.getElementById("glowTitle").style.opacity=1;
-
-},9000);
 
 </script>
 
