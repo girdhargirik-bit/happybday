@@ -5,69 +5,85 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy Birthday Jannu ❤️</title>
 
+<link rel="stylesheet" href="file/default.css">
+
+<script src="file/jquery.min.js"></script>
+<script src="file/jscex.min.js"></script>
+<script src="file/jscex-parser.js"></script>
+<script src="file/jscex-jit.js"></script>
+<script src="file/jscex-builderbase.min.js"></script>
+<script src="file/jscex-async.min.js"></script>
+<script src="file/jscex-async-powerpack.min.js"></script>
+<script src="file/functions.js"></script>
+<script src="file/love.js"></script>
+
 <style>
 
 body{
 margin:0;
-font-family:Arial, sans-serif;
-text-align:center;
-background:linear-gradient(135deg,#ff6a88,#ff99ac);
-overflow-x:hidden;
-color:white;
-padding:20px;
-}
-
-/* INTRO SCREEN */
-
-#intro{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
 background:black;
-display:flex;
-justify-content:center;
-align-items:center;
 color:white;
-font-size:28px;
-z-index:9999;
-cursor:pointer;
 text-align:center;
-padding:20px;
+font-family:Arial, sans-serif;
+overflow:hidden;
 }
 
-/* TITLE */
+/* START BUTTON */
 
-h1{
-font-size:42px;
-margin-top:20px;
+#startBtn{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:20px 40px;
+font-size:22px;
+background:#ff4d6d;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+z-index:9999;
 }
 
-/* MESSAGE */
+/* HEART PHOTO */
 
-#message{
-font-size:20px;
-max-width:700px;
-margin:20px auto;
-line-height:1.6;
-min-height:120px;
+.heart-photo{
+position:absolute;
+top:20px;
+right:40px;
+width:180px;
+height:180px;
+animation:beat 1.3s infinite;
+}
+
+.heart-photo img{
+width:100%;
+border-radius:50%;
+border:5px solid white;
+}
+
+@keyframes beat{
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
 }
 
 /* SLIDESHOW */
 
 .slideshow{
+position:absolute;
+bottom:40px;
+left:50%;
+transform:translateX(-50%);
 width:260px;
 height:320px;
-margin:30px auto;
-position:relative;
 }
 
 .slide{
 width:100%;
 height:100%;
 object-fit:cover;
-border-radius:15px;
+border-radius:12px;
 position:absolute;
 opacity:0;
 transition:opacity 1s;
@@ -77,115 +93,55 @@ transition:opacity 1s;
 opacity:1;
 }
 
-/* BALLOONS */
+/* PETALS */
 
-.balloon{
-width:40px;
-height:50px;
-border-radius:50%;
-position:absolute;
-bottom:-60px;
-animation:float 12s linear infinite;
-}
-
-.balloon:after{
-content:'';
-width:2px;
-height:40px;
-background:white;
-position:absolute;
-left:50%;
-top:50px;
-}
-
-@keyframes float{
-0%{transform:translateY(0);}
-100%{transform:translateY(-120vh);}
-}
-
-/* CAKE */
-
-.cake{
-margin:40px auto;
-width:150px;
-height:90px;
-background:#ffcc66;
-border-radius:12px;
-position:relative;
-}
-
-.candle{
-width:10px;
-height:35px;
-background:white;
-position:absolute;
-top:-35px;
-left:70px;
-}
-
-.flame{
-width:12px;
-height:12px;
-background:orange;
-border-radius:50%;
-animation:flicker 0.5s infinite;
-}
-
-@keyframes flicker{
-0%{transform:scale(1);}
-50%{transform:scale(1.3);}
-100%{transform:scale(1);}
-}
-
-/* CONFETTI */
-
-.confetti{
-position:absolute;
-width:10px;
-height:10px;
-top:-10px;
-animation:fall 5s linear infinite;
+.petal{
+position:fixed;
+top:-20px;
+font-size:22px;
+animation:fall linear infinite;
 }
 
 @keyframes fall{
-to{transform:translateY(110vh) rotate(360deg);}
+to{
+transform:translateY(100vh) rotate(360deg);
 }
-
-/* HEARTS */
-
-.heart{
-position:absolute;
-font-size:20px;
-animation:rise 6s linear infinite;
-}
-
-@keyframes rise{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-120vh);opacity:0;}
 }
 
 /* FIREWORKS */
 
 @keyframes explode{
-0%{transform:scale(1);opacity:1;}
-100%{transform:scale(15);opacity:0;}
+0%{transform:scale(1);opacity:1}
+100%{transform:scale(15);opacity:0}
 }
 
-#timer{
-margin-top:20px;
+/* TIMER */
+
+#birthdayTimer{
+position:absolute;
+top:20px;
+left:40px;
 font-size:18px;
+color:#ffccd5;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="intro">Tap the screen for your surprise ❤️</div>
+<button id="startBtn">Tap for your birthday surprise ❤️</button>
 
-<h1>🎉 Happy Birthday Jannu ❤️</h1>
+<audio id="music" loop>
+<source src="aud.mp3">
+</audio>
 
-<div id="message"></div>
+<div id="birthdayTimer"></div>
+
+<div class="heart-photo">
+<img src="jannu1.jpg">
+</div>
 
 <div class="slideshow">
 
@@ -198,27 +154,25 @@ font-size:18px;
 
 </div>
 
-<div class="cake">
-<div class="candle">
-<div class="flame"></div>
-</div>
-</div>
-
-<div id="timer"></div>
-
-<audio autoplay loop>
-<source src="aud.mp3" type="audio/mp3">
-</audio>
+<canvas id="canvas" width="1100" height="680"></canvas>
 
 <script>
 
-/* SURPRISE FIREWORKS */
+/* START BUTTON */
 
-const intro=document.getElementById("intro");
+document.getElementById("startBtn").onclick=function(){
 
-intro.onclick=function(){
+document.getElementById("music").play();
 
-intro.style.display="none";
+fireworks();
+
+this.style.display="none";
+
+};
+
+/* FIREWORKS */
+
+function fireworks(){
 
 for(let i=0;i<40;i++){
 
@@ -239,30 +193,9 @@ setTimeout(()=>fire.remove(),1000);
 
 }
 
-};
-
-/* TYPING MESSAGE */
-
-const text=`Out of all the people in this world, I’m really thankful that life crossed our paths. 
-You don’t even realize how much your presence means to me. 
-Somehow, the smallest moments with you have become some of the most special ones in my life.
-
-I just hope today reminds you how truly amazing you are. 
-Stay the same beautiful soul, Jannu. ❤️`;
-
-let i=0;
-
-function typing(){
-if(i<text.length){
-document.getElementById("message").innerHTML+=text.charAt(i);
-i++;
-setTimeout(typing,35);
-}
 }
 
-typing();
-
-/* PHOTO SLIDESHOW */
+/* SLIDESHOW */
 
 let slides=document.querySelectorAll(".slide");
 let index=0;
@@ -275,79 +208,51 @@ slides[index].classList.add("active");
 
 index++;
 
-if(index>=slides.length){
-index=0;
-}
+if(index>=slides.length) index=0;
 
 }
 
 showSlides();
 setInterval(showSlides,3000);
 
-/* BALLOONS */
-
-for(let i=0;i<25;i++){
-
-let balloon=document.createElement("div");
-balloon.className="balloon";
-balloon.style.left=Math.random()*100+"vw";
-balloon.style.background=`hsl(${Math.random()*360},70%,60%)`;
-balloon.style.animationDuration=(7+Math.random()*5)+"s";
-
-document.body.appendChild(balloon);
-
-}
-
-/* CONFETTI */
-
-for(let i=0;i<70;i++){
-
-let conf=document.createElement("div");
-conf.className="confetti";
-conf.style.left=Math.random()*100+"vw";
-conf.style.animationDuration=(3+Math.random()*4)+"s";
-conf.style.background=`hsl(${Math.random()*360},80%,60%)`;
-
-document.body.appendChild(conf);
-
-}
-
-/* FLOATING HEARTS */
+/* FALLING PETALS */
 
 setInterval(()=>{
 
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
+let petal=document.createElement("div");
 
-document.body.appendChild(heart);
+petal.className="petal";
+petal.innerHTML="🌸";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(5+Math.random()*5)+"s";
 
-setTimeout(()=>heart.remove(),6000);
+document.body.appendChild(petal);
+
+setTimeout(()=>petal.remove(),10000);
 
 },400);
 
-/* TIMER SINCE MARCH 12 */
+/* BIRTHDAY TIMER */
 
-const startDate=new Date("March 12, 2026 00:00:00").getTime();
+const birthDate = new Date("March 12, 1998 00:00:00").getTime();
 
-function updateTimer(){
+function updateBirthdayTimer(){
 
-const now=new Date().getTime();
-const diff=now-startDate;
+const now = new Date().getTime();
+const diff = now - birthDate;
 
-const days=Math.floor(diff/(1000*60*60*24));
-const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
-const seconds=Math.floor((diff%(1000*60))/1000);
+const days = Math.floor(diff/(1000*60*60*24));
+const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+const seconds = Math.floor((diff%(1000*60))/1000);
 
-document.getElementById("timer").innerHTML=
-"❤️ Time since this special day: "+
+document.getElementById("birthdayTimer").innerHTML =
+"❤️ Jannu has been making the world beautiful for<br>" +
 days+" days "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
 
 }
 
-setInterval(updateTimer,1000);
+setInterval(updateBirthdayTimer,1000);
 
 </script>
 
