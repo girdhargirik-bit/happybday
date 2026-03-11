@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
 <title>Happy Birthday Jannu ❤️</title>
 
 <link rel="stylesheet" href="file/default.css">
@@ -18,64 +17,149 @@
 <script src="file/love.js"></script>
 
 <style>
+
 body{
-  margin:0;
-  background:linear-gradient(135deg,#ff6a88,#ff99ac);
-  color:#fff;
-  font-family:Arial, sans-serif;
-  text-align:center;
-  overflow:hidden;
+margin:0;
+background:linear-gradient(135deg,#ff6a88,#ff99ac);
+font-family:sans-serif;
+color:white;
+text-align:center;
+overflow:hidden;
 }
 
-/* Start button */
+/* star sky */
+
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+animation:twinkle 3s infinite;
+}
+
+@keyframes twinkle{
+0%{opacity:0}
+50%{opacity:1}
+100%{opacity:0}
+}
+
+/* start button */
+
 #startBtn{
-  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
-  padding:20px 40px;font-size:22px;background:#ff4d6d;color:#fff;
-  border:none;border-radius:12px;cursor:pointer;z-index:9999;
-  box-shadow:0 10px 25px rgba(0,0,0,.25);
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+padding:20px 40px;
+font-size:22px;
+background:#ff4d6d;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
+z-index:9999;
 }
 
-/* Glowing title (revealed after tree bloom) */
+/* glowing title */
+
 #glowTitle{
-  margin:16px 0 8px;
-  font-size:44px;
-  opacity:0;
-  transition:opacity 1s ease;
-  text-shadow:0 0 10px #fff,0 0 20px #ff8fb1,0 0 40px #ff4d6d;
+font-size:44px;
+opacity:0;
+text-shadow:0 0 10px #fff,0 0 20px #ff8fb1,0 0 40px #ff4d6d;
+transition:1s;
 }
 
-/* Round beating photo */
+/* photo */
+
 .photo{
-  width:180px;height:180px;margin:10px auto;border-radius:50%;
-  overflow:hidden;border:6px solid #fff;animation:beat 1.2s infinite;
+width:180px;
+height:180px;
+margin:auto;
+border-radius:50%;
+overflow:hidden;
+border:6px solid white;
+animation:beat 1.2s infinite;
 }
-.photo img{width:100%;height:100%;object-fit:cover}
-@keyframes beat{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
 
-/* Slideshow */
-.slideshow{width:260px;height:320px;margin:10px auto;position:relative}
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+@keyframes beat{
+0%{transform:scale(1)}
+50%{transform:scale(1.15)}
+100%{transform:scale(1)}
+}
+
+/* slideshow */
+
+.slideshow{
+width:260px;
+height:320px;
+margin:auto;
+position:relative;
+}
+
 .slide{
-  width:100%;height:100%;object-fit:cover;border-radius:12px;
-  position:absolute;opacity:0;transition:opacity 1s;
+width:100%;
+height:100%;
+position:absolute;
+object-fit:cover;
+border-radius:10px;
+opacity:0;
+transition:1s;
 }
-.slide.active{opacity:1}
 
-/* Petals */
-.petal{position:fixed;top:-20px;font-size:22px;animation:fall linear infinite}
-@keyframes fall{to{transform:translateY(100vh) rotate(360deg)}}
+.slide.active{
+opacity:1;
+}
 
-/* Firework particle */
-@keyframes explode{0%{transform:scale(1);opacity:1}100%{transform:scale(15);opacity:0}}
+/* petals */
 
-/* Timer + message */
-#timer{font-size:18px;margin:6px 0}
+.petal{
+position:fixed;
+top:-20px;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{
+transform:translateY(100vh) rotate(360deg);
+}
+}
+
+/* fireworks */
+
+@keyframes explode{
+0%{transform:scale(1);opacity:1}
+100%{transform:scale(15);opacity:0}
+}
+
+/* cake */
+
+.cake{
+font-size:50px;
+}
+
+/* canvas tree */
+
+#canvas{
+position:absolute;
+top:0;
+left:0;
+z-index:-1;
+}
+
 #message{
-  width:90%;max-width:640px;margin:10px auto 6px;
-  font-size:18px;line-height:1.6;min-height:120px
+width:80%;
+margin:auto;
+font-size:18px;
+line-height:1.6;
 }
 
-/* Cake */
-.cake{font-size:50px;margin-top:4px}
 </style>
 </head>
 
@@ -84,13 +168,13 @@ body{
 <button id="startBtn">Tap for your birthday surprise ❤️</button>
 
 <audio id="music" loop>
-  <source src="aud.mp3" type="audio/mp3">
+<source src="aud.mp3">
 </audio>
 
 <h1 id="glowTitle">🎉 Happy Birthday Jannu ❤️</h1>
 
 <div class="photo">
-  <img src="jannu1.jpg" alt="Jannu">
+<img src="jannu1.jpg">
 </div>
 
 <div id="message"></div>
@@ -98,12 +182,14 @@ body{
 <div class="cake">🎂</div>
 
 <div class="slideshow">
-  <img class="slide" src="jannu1.jpg">
-  <img class="slide" src="jannu2.jpg">
-  <img class="slide" src="jannu3.jpg">
-  <img class="slide" src="jannu4.jpg">
-  <img class="slide" src="jannu5.jpg">
-  <img class="slide" src="jannu6.jpg">
+
+<img class="slide" src="jannu1.jpg">
+<img class="slide" src="jannu2.jpg">
+<img class="slide" src="jannu3.jpg">
+<img class="slide" src="jannu4.jpg">
+<img class="slide" src="jannu5.jpg">
+<img class="slide" src="jannu6.jpg">
+
 </div>
 
 <div id="timer"></div>
@@ -111,153 +197,157 @@ body{
 <canvas id="canvas" width="1100" height="680"></canvas>
 
 <script>
-/* ===== Tap to start (music + initial fireworks) ===== */
+
+/* star sky */
+
+for(let i=0;i<200;i++){
+
+let star=document.createElement("div");
+
+star.className="star";
+
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+star.style.animationDuration=(2+Math.random()*3)+"s";
+
+document.body.appendChild(star);
+
+}
+
+/* start button */
+
 document.getElementById("startBtn").onclick=function(){
-  document.getElementById("music").play().catch(()=>{});
-  burstFireworks(35);
-  this.style.display="none";
+
+document.getElementById("music").play();
+
+fireworks(40);
+
+this.style.display="none";
+
 };
 
-/* ===== Fireworks utility ===== */
-function burstFireworks(n=30){
-  for(let i=0;i<n;i++){
-    let fire=document.createElement("div");
-    fire.style.position="fixed";
-    fire.style.width="6px";
-    fire.style.height="6px";
-    fire.style.background=`hsl(${Math.random()*360},100%,60%)`;
-    fire.style.left=Math.random()*100+"vw";
-    fire.style.top=Math.random()*100+"vh";
-    fire.style.borderRadius="50%";
-    fire.style.animation="explode 1s ease-out forwards";
-    document.body.appendChild(fire);
-    setTimeout(()=>fire.remove(),1000);
-  }
+/* fireworks */
+
+function fireworks(n){
+
+for(let i=0;i<n;i++){
+
+let fire=document.createElement("div");
+
+fire.style.position="fixed";
+fire.style.width="6px";
+fire.style.height="6px";
+fire.style.background=`hsl(${Math.random()*360},100%,60%)`;
+fire.style.left=Math.random()*100+"vw";
+fire.style.top=Math.random()*100+"vh";
+fire.style.borderRadius="50%";
+fire.style.animation="explode 1s ease-out forwards";
+
+document.body.appendChild(fire);
+
+setTimeout(()=>fire.remove(),1000);
+
 }
 
-/* ===== Slideshow ===== */
-let slides=document.querySelectorAll(".slide");
-let idx=0;
-function showSlides(){
-  slides.forEach(s=>s.classList.remove("active"));
-  slides[idx].classList.add("active");
-  idx=(idx+1)%slides.length;
 }
+
+/* slideshow */
+
+let slides=document.querySelectorAll(".slide");
+let index=0;
+
+function showSlides(){
+
+slides.forEach(s=>s.classList.remove("active"));
+
+slides[index].classList.add("active");
+
+index++;
+
+if(index>=slides.length) index=0;
+
+}
+
 showSlides();
+
 setInterval(showSlides,3000);
 
-/* ===== Falling petals ===== */
+/* petals */
+
 setInterval(()=>{
-  let p=document.createElement("div");
-  p.className="petal";
-  p.innerHTML="🌸";
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(p);
-  setTimeout(()=>p.remove(),10000);
+
+let petal=document.createElement("div");
+
+petal.className="petal";
+petal.innerHTML="🌸";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(5+Math.random()*5)+"s";
+
+document.body.appendChild(petal);
+
+setTimeout(()=>petal.remove(),10000);
+
 },400);
 
-/* ===== Timeline since 12 March 1998 ===== */
-const birthDate = new Date("March 12, 1998 00:00:00").getTime();
+/* timer */
+
+const birthDate=new Date("March 12, 1998").getTime();
+
 function updateTimer(){
-  const now = new Date().getTime();
-  const diff = now - birthDate;
-  const d = Math.floor(diff/(1000*60*60*24));
-  const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  const m = Math.floor((diff%(1000*60*60))/(1000*60));
-  const s = Math.floor((diff%(1000*60))/1000);
-  document.getElementById("timer").innerHTML =
-    "❤️ Jannu has been making the world beautiful for<br>" +
-    d+" days "+h+" hours "+m+" minutes "+s+" seconds";
+
+const now=new Date().getTime();
+
+const diff=now-birthDate;
+
+const days=Math.floor(diff/(1000*60*60*24));
+const hours=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+const minutes=Math.floor((diff%(1000*60*60))/(1000*60));
+const seconds=Math.floor((diff%(1000*60))/1000);
+
+document.getElementById("timer").innerHTML=
+"❤️ Jannu has been making the world beautiful for<br>"+
+days+" days "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+
 }
+
 setInterval(updateTimer,1000);
 
-/* ===== Typing love letter ===== */
+/* typing message */
+
 const text=`Happy Birthday Jannu ❤️
 
 Out of all the people in this world, I’m really thankful that life crossed our paths. You don’t even realize how much your presence means to me. Somehow, the smallest moments with you have become some of the most special ones in my life.
 
 I just hope today reminds you how truly amazing you are. Stay the same beautiful soul, Jannu.`;
-let ti=0;
+
+let i=0;
+
 function typing(){
-  if(ti<text.length){
-    document.getElementById("message").innerHTML += text.charAt(ti);
-    ti++; setTimeout(typing,35);
-  }
+
+if(i<text.length){
+
+document.getElementById("message").innerHTML+=text.charAt(i);
+
+i++;
+
+setTimeout(typing,35);
+
 }
+
+}
+
 typing();
 
-/* ===== Heart tree animation (from your original project) ===== */
-(function() {
-  var canvas = $('#canvas');
-  if (!canvas[0].getContext) { return false; }
+/* when tree finishes bloom */
 
-  var width = canvas.width();
-  var height = canvas.height();
-  canvas.attr("width", width);
-  canvas.attr("height", height);
+setTimeout(function(){
 
-  var opts = {
-    seed: { x: width / 2 - 20, color: "rgb(190, 26, 37)", scale: 2 },
-    branch: [[535,680,570,250,500,200,30,100,[
-      [540,500,455,417,340,400,13,100,[
-        [450,435,434,430,394,395,2,40]
-      ]],
-      [550,445,600,356,680,345,12,100,[
-        [578,400,648,409,661,426,3,80]
-      ]],
-      [539,281,537,248,534,217,3,40],
-      [546,397,413,247,328,244,9,80,[
-        [427,286,383,253,371,205,2,40],
-        [498,345,435,315,395,330,4,60]
-      ]],
-      [546,357,608,252,678,221,6,100,[
-        [590,293,646,277,648,271,2,80]
-      ]]
-    ]]],
-    bloom: { num: 700, width: 1080, height: 650 },
-    footer: { width: 1200, height: 5, speed: 10 }
-  };
+fireworks(80);
 
-  var tree = new Tree(canvas[0], width, height, opts);
-  var seed = tree.seed;
-  var foot = tree.footer;
+document.getElementById("glowTitle").style.opacity=1;
 
-  var seedAnimate = eval(Jscex.compile("async", function () {
-    seed.draw();
-    while (seed.canScale()) { seed.scale(0.95); $await(Jscex.Async.sleep(10)); }
-    while (seed.canMove()) { seed.move(0, 2); foot.draw(); $await(Jscex.Async.sleep(10)); }
-  }));
+},9000);
 
-  var growAnimate = eval(Jscex.compile("async", function () {
-    do { tree.grow(); $await(Jscex.Async.sleep(10)); } while (tree.canGrow());
-  }));
-
-  var flowAnimate = eval(Jscex.compile("async", function () {
-    do { tree.flower(2); $await(Jscex.Async.sleep(10)); } while (tree.canFlower());
-  }));
-
-  var textAnimate = eval(Jscex.compile("async", function () {
-    $("#message").show();
-  }));
-
-  /* When bloom finishes → fireworks + glowing title */
-  var endCelebrate = eval(Jscex.compile("async", function () {
-    $await(Jscex.Async.sleep(500));
-    burstFireworks(60);
-    document.getElementById("glowTitle").style.opacity = 1;
-  }));
-
-  var runAsync = eval(Jscex.compile("async", function () {
-    $await(seedAnimate());
-    $await(growAnimate());
-    $await(flowAnimate());
-    textAnimate().start();
-    $await(endCelebrate());
-  }));
-
-  runAsync().start();
-})();
 </script>
 
 </body>
