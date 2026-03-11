@@ -3,7 +3,21 @@
 <head>
 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Happy Birthday Jannu ❤️</title>
+
+<link rel="stylesheet" href="file/default.css">
+
+<script src="file/jquery.min.js"></script>
+<script src="file/jscex.min.js"></script>
+<script src="file/jscex-parser.js"></script>
+<script src="file/jscex-jit.js"></script>
+<script src="file/jscex-builderbase.min.js"></script>
+<script src="file/jscex-async.min.js"></script>
+<script src="file/jscex-async-powerpack.min.js"></script>
+<script src="file/functions.js"></script>
+<script src="file/love.js"></script>
 
 <style>
 
@@ -16,7 +30,7 @@ text-align:center;
 overflow-x:hidden;
 }
 
-/* INTRO SCREEN */
+/* INTRO */
 
 #intro{
 position:fixed;
@@ -31,8 +45,8 @@ z-index:9999;
 }
 
 #openBtn{
-padding:20px 40px;
-font-size:22px;
+padding:18px 35px;
+font-size:20px;
 background:white;
 color:#ff4d6d;
 border:none;
@@ -40,32 +54,32 @@ border-radius:10px;
 cursor:pointer;
 }
 
-/* CONTAINER */
+/* MAIN CONTAINER */
 
 .container{
 max-width:700px;
 margin:auto;
-padding-top:40px;
+padding:20px;
 }
 
 /* TITLE */
 
 #glowTitle{
-font-size:42px;
-margin-bottom:20px;
+font-size:32px;
 opacity:0;
 text-shadow:0 0 10px white,0 0 20px #ff8fb1,0 0 40px #ff4d6d;
+margin-bottom:20px;
 }
 
 /* PHOTO */
 
 .photo{
-width:180px;
-height:180px;
+width:150px;
+height:150px;
 border-radius:50%;
 overflow:hidden;
-margin:20px auto;
-border:6px solid white;
+margin:auto;
+border:5px solid white;
 animation:beat 1.2s infinite;
 }
 
@@ -77,41 +91,34 @@ object-fit:cover;
 
 @keyframes beat{
 0%{transform:scale(1)}
-50%{transform:scale(1.12)}
+50%{transform:scale(1.1)}
 100%{transform:scale(1)}
 }
 
 /* MESSAGE */
 
 #message{
+font-size:16px;
+line-height:1.6;
 max-width:600px;
-margin:auto;
-font-size:18px;
-line-height:1.7;
-padding:0 20px;
-}
-
-/* CAKE */
-
-.cake{
-font-size:50px;
-margin:20px 0;
+margin:20px auto;
 }
 
 /* SLIDESHOW */
 
 .slideshow{
-width:260px;
+width:90%;
+max-width:260px;
 height:320px;
-margin:30px auto;
+margin:auto;
 position:relative;
 }
 
 .slide{
 width:100%;
 height:100%;
-position:absolute;
 object-fit:cover;
+position:absolute;
 border-radius:12px;
 opacity:0;
 transition:1s;
@@ -125,7 +132,7 @@ opacity:1;
 
 #timer{
 margin-top:20px;
-font-size:18px;
+font-size:16px;
 }
 
 /* PETALS */
@@ -143,7 +150,7 @@ transform:translateY(100vh) rotate(360deg);
 }
 }
 
-/* STAR SKY */
+/* STARS */
 
 .star{
 position:fixed;
@@ -159,11 +166,33 @@ animation:twinkle 3s infinite;
 100%{opacity:0}
 }
 
-/* FIREWORK */
+/* TREE CANVAS */
 
-@keyframes explode{
-0%{transform:scale(1);opacity:1}
-100%{transform:scale(15);opacity:0}
+#canvas{
+position:fixed;
+top:0;
+left:50%;
+transform:translateX(-50%);
+z-index:-1;
+}
+
+/* MOBILE FIX */
+
+@media(max-width:600px){
+
+#glowTitle{
+font-size:26px;
+}
+
+.photo{
+width:130px;
+height:130px;
+}
+
+.slideshow{
+height:280px;
+}
+
 }
 
 </style>
@@ -175,7 +204,6 @@ animation:twinkle 3s infinite;
 <div id="intro">
 
 <h2>Tap to open your birthday surprise ❤️</h2>
-
 <button id="openBtn">Open</button>
 
 </div>
@@ -194,7 +222,7 @@ animation:twinkle 3s infinite;
 
 <div id="message"></div>
 
-<div class="cake">🎂</div>
+<div style="font-size:40px">🎂</div>
 
 <div class="slideshow">
 
@@ -211,24 +239,25 @@ animation:twinkle 3s infinite;
 
 </div>
 
+<canvas id="canvas" width="1100" height="680"></canvas>
+
 <script>
 
 /* STAR SKY */
 
-for(let i=0;i<200;i++){
+for(let i=0;i<150;i++){
 
 let star=document.createElement("div");
 star.className="star";
 
 star.style.left=Math.random()*100+"vw";
 star.style.top=Math.random()*100+"vh";
-star.style.animationDuration=(2+Math.random()*3)+"s";
 
 document.body.appendChild(star);
 
 }
 
-/* INTRO */
+/* OPEN */
 
 document.getElementById("openBtn").onclick=function(){
 
@@ -236,40 +265,9 @@ document.getElementById("intro").style.display="none";
 
 document.getElementById("music").play();
 
-setTimeout(function(){
-
-fireworks(60);
-
 document.getElementById("glowTitle").style.opacity=1;
 
-},2000);
-
 };
-
-/* FIREWORK */
-
-function fireworks(n){
-
-for(let i=0;i<n;i++){
-
-let fire=document.createElement("div");
-
-fire.style.position="fixed";
-fire.style.width="6px";
-fire.style.height="6px";
-fire.style.background=`hsl(${Math.random()*360},100%,60%)`;
-fire.style.left=Math.random()*100+"vw";
-fire.style.top=Math.random()*100+"vh";
-fire.style.borderRadius="50%";
-fire.style.animation="explode 1s ease-out forwards";
-
-document.body.appendChild(fire);
-
-setTimeout(()=>fire.remove(),1000);
-
-}
-
-}
 
 /* SLIDESHOW */
 
@@ -307,7 +305,7 @@ document.body.appendChild(petal);
 
 setTimeout(()=>petal.remove(),10000);
 
-},400);
+},500);
 
 /* TIMER */
 
@@ -316,6 +314,7 @@ const birthDate=new Date("March 12, 1998").getTime();
 function updateTimer(){
 
 const now=new Date().getTime();
+
 const diff=now-birthDate;
 
 const days=Math.floor(diff/(1000*60*60*24));
